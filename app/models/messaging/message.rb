@@ -25,10 +25,10 @@ module Messaging
       @recipient_list
     end
 
-    def recipients=(string='')
+    def recipients=(recipient_ids)
       @recipient_list = []
-      string.split(',').each do |s|
-        @recipient_list << MessagingUser.find_by_email!(s.strip) unless s.blank?
+      recipient_ids.each do |id|
+        @recipient_list << MessagingUser.find(id.strip) unless s.blank?
       end
     end
   end

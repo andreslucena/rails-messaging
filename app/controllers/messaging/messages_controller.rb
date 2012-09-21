@@ -1,5 +1,5 @@
 module Messaging
-  class MessagesController < Messaging::ApplicationController
+  class MessagesController < Messaging::MessagingController
     def index
       @box = params[:box] || 'inbox'
       @messages = current_user.mailbox.inbox if @box == 'inbox'
@@ -39,7 +39,7 @@ module Messaging
         return redirect_to root_path
       end
       @message = Message.new conversation_id: @conversation.id
-      current_user.read(@conversation)
+      current_user.mark_as_read(@conversation)
     end
 
     def trash
@@ -59,7 +59,7 @@ module Messaging
       conversation = Conversation.find(params[:id])
       current_user.untrash(conversation)
       flash[:notice] = "Message untrashed."
-      redirect_to messages_path(box: 'inbox')
+      redirect_to messages_path(:box => 'inbox')
     end
 
     def search
