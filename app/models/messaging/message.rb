@@ -28,7 +28,7 @@ module Messaging
     def recipients=(recipient_ids)
       @recipient_list = []
       recipient_ids.each do |id|
-        @recipient_list << MessagingUser.find(id.strip) unless s.blank?
+        @recipient_list << MessagingUser.find(id.strip) unless id.blank?
       end
     end
   end
