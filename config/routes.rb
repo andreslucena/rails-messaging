@@ -3,9 +3,10 @@ Messaging::Engine.routes.draw do
     member do
       delete 'trash'
       post 'untrash'
+      put :move
     end
     collection do
-      delete 'trash'
+      put :move
     end
   end
   post 'search' => 'messages#search'

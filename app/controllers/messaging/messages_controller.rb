@@ -5,6 +5,8 @@ module Messaging
       @messages = current_user.mailbox.inbox if @box == 'inbox'
       @messages = current_user.mailbox.sentbox if @box == 'sent'
       @messages = current_user.mailbox.trash if @box == 'trash'
+      @messages = current_user.mailbox.archive if @box == 'archive'
+      session[:last_mailbox] = @box
     end
 
     def new
@@ -42,15 +44,16 @@ module Messaging
       current_user.mark_as_read(@conversation)
     end
 
-    def trash
+    def move
+      mailbox = params[:mailbox]
       conversation = Conversation.find_by_id(params[:id])
       if conversation
-        current_user.trash(conversation)
-        flash[:notice] = "Message sent to trash."
+        current_user.send(mailbox, conversation)
+        flash[:notice] = "Message sent to #{mailbox}."
       else
         conversations = Conversation.find(params[:conversations])
-        conversations.each { |c| current_user.trash(c) }
-        flash[:notice] = "Messages sent to trash."
+        conversations.each { |c| current_user.send(mailbox, c) }
+        flash[:notice] = "Messages sent to #{mailbox}."
       end
       redirect_to messages_path(box: params[:current_box])
     end

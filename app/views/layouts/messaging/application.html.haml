@@ -52,6 +52,10 @@
               = link_to "Trash", messages_path(box: 'trash'), class: 'selected'
             -else
               = link_to "Trash", messages_path(box: 'trash')
+            -if @box == 'archive'
+              = link_to "Archive", messages_path(box: 'archive'), class: 'selected'
+            -else
+              = link_to "Archive", messages_path(box: 'archive')
             = form_tag search_path do
               %input{ type: 'search', placeholder: 'Search', name: 'search' }
         #main.grid_10
