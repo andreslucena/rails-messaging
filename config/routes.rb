@@ -1,4 +1,5 @@
 Messaging::Engine.routes.draw do
+  resources :conversations, :only => [:update]
   resources :messages do
     member do
       delete 'trash'
