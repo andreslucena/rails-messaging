@@ -23,8 +23,8 @@ Gem::Specification.new do |s|
   s.add_dependency "carrierwave"
   s.add_dependency "sunspot_rails"
   s.add_dependency "jquery-rails"
-  s.add_dependency "kaminari"
   s.add_dependency "haml"
+  s.add_dependency "will_paginate"
 
   s.add_development_dependency "sqlite3"
 end
