@@ -6,7 +6,7 @@ module Messaging
       @messages = current_user.mailbox.sentbox if @box == 'sent'
       @messages = current_user.mailbox.trash if @box == 'trash'
       @messages = current_user.mailbox.archive if @box == 'archive'
-      @messages = @messages.page(params[:page])
+      @messages = @messages.page(params[:page]).per_page(25)
       session[:last_mailbox] = @box
     end
 
