@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'cancan', '~> 1.6'
-  s.add_dependency "rails", "~> 3.2.2"
+  s.add_dependency "rails", "~> 4.0.0"
   s.add_dependency "devise"
   s.add_dependency "simple_form"
   s.add_dependency "carrierwave"
